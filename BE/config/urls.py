@@ -3,11 +3,15 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 
-from rest_framework_jwt.views import obtain_jwt_token
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
+
+from shop.users.views import CreateUser
 
 
 urlpatterns = [
+    url(r'^register', CreateUser.as_view()),
     url(r'^api-token-auth/', obtain_jwt_token),
+    url(r'^api-token-refresh/', refresh_jwt_token),
     url(r'^admin/', admin.site.urls),
 ]
 

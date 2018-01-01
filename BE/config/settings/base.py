@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'users',
+    'shop.users',
 ]
 
 SITE_ID = 1
@@ -162,6 +162,10 @@ REST_FRAMEWORK = {
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     ),
 
+}
+
+JWT_AUTH = {
+    'JWT_ALLOW_REFRESH': True,
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
