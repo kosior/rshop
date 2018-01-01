@@ -1,15 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { AuthService } from '../services/auth/auth.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
+  invalidLogin = false;
 
-  constructor() { }
+  constructor(private router: Router, private service: AuthService, private route: ActivatedRoute) { }
 
-  ngOnInit() {
+  login(credentials) {
+    const next = this.route.snapshot.queryParamMap.get('next') || '/';
+    this.service.login(credentials)
+      .subscribe(result => {
+        if (result) {
+          this.router.navigate([next]);
+        } else {
+          this.invalidLogin = true;
+        }
+      });
   }
 
 }
