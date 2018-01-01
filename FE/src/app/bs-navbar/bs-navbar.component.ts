@@ -7,10 +7,11 @@ import {AuthService} from '../services/auth/auth.service';
   styleUrls: ['./bs-navbar.component.css']
 })
 export class BsNavbarComponent {
-  username: string;
 
-  constructor(public auth: AuthService) {
-    this.username = localStorage.getItem('username');
+  constructor(public auth: AuthService) {}
+
+  getUsername() {
+    return localStorage.getItem('username');
   }
 
 }

@@ -17,10 +17,11 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './services/auth/auth.service';
-import {FormsModule} from '@angular/forms';
-import {JwtModule} from '@auth0/angular-jwt';
-import {AuthGuard} from './services/auth-guard/auth-guard.service';
-import {JwtService} from './services/jwt/jwt.service';
+import { FormsModule } from '@angular/forms';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AuthGuard } from './services/auth-guard/auth-guard.service';
+import { JwtService } from './services/jwt/jwt.service';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {JwtService} from './services/jwt/jwt.service';
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +57,7 @@ import {JwtService} from './services/jwt/jwt.service';
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
       { path: 'products', component: ProductsComponent },
       { path: 'shopping-cart', component: ShoppingCartComponent },
 

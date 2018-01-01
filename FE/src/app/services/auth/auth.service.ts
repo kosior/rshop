@@ -8,18 +8,20 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
 
 
-interface LoginResponse {
+interface ApiAuthResponse {
   token: string;
 }
 
 @Injectable()
 export class AuthService {
-  private url = 'http://127.0.0.1:8000/api-token-auth/';
+  private loginUrl = 'http://127.0.0.1:8000/api-token-auth/';
+  private registerUrl = 'http://127.0.0.1:8000/register/';
+
 
   constructor(private http: HttpClient, private jwtService: JwtService, private router: Router) { }
 
-  login(credentials): Observable<boolean> {
-    return this.http.post<LoginResponse>(this.url, credentials)
+  _post_auth(data, url) {
+    return this.http.post<ApiAuthResponse>(url, data)
       .map(response => {
         if (response.token) {
           this.jwtService.setTokenAndUsername(response.token);
@@ -31,6 +33,14 @@ export class AuthService {
       .catch((error: any) => {
         return Observable.of(false);
       });
+  }
+
+  register(data): Observable<boolean> {
+    return this._post_auth(data, this.registerUrl);
+  }
+
+  login(credentials): Observable<boolean> {
+    return this._post_auth(credentials, this.loginUrl);
   }
 
   logout() {
