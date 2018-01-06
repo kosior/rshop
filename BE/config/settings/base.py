@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'common',
     'shop.users',
 ]
 
@@ -166,6 +167,7 @@ REST_FRAMEWORK = {
 
 JWT_AUTH = {
     'JWT_ALLOW_REFRESH': True,
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'common.helpers.jwt_response_payload_handler',
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
