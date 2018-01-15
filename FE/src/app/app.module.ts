@@ -22,6 +22,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuard } from './services/auth-guard/auth-guard.service';
 import { JwtService } from './services/jwt/jwt.service';
 import { RegisterComponent } from './register/register.component';
+import { AdminAuthGuard } from './services/admin-auth-guard/admin-auth-guard.service';
 
 
 @NgModule({
@@ -65,13 +66,14 @@ import { RegisterComponent } from './register/register.component';
       { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard] },
       { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
 
-      { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard] },
-      { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard] },
+      { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     ])
   ],
   providers: [
     AuthService,
     AuthGuard,
+    AdminAuthGuard,
     JwtService
   ],
   bootstrap: [AppComponent]

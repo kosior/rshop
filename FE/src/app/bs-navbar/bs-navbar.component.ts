@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthService} from '../services/auth/auth.service';
+import {Observable} from 'rxjs/Observable';
+import {User} from '../models/user.model';
 
 @Component({
   selector: 'app-bs-navbar',
@@ -7,11 +9,14 @@ import {AuthService} from '../services/auth/auth.service';
   styleUrls: ['./bs-navbar.component.css']
 })
 export class BsNavbarComponent {
+  user$: Observable<User>;
 
-  constructor(public auth: AuthService) {}
+  constructor(private auth: AuthService) {
+    this.user$ = auth.user$;
+  }
 
-  getUsername() {
-    return localStorage.getItem('username');
+  logout() {
+    this.auth.logout();
   }
 
 }

@@ -10,6 +10,10 @@ export class JwtService {
     localStorage.setItem('token', token);
   }
 
+  getToken() {
+    return this.jwtHelper.tokenGetter();
+  }
+
   removeToken() {
     localStorage.removeItem('token');
   }
