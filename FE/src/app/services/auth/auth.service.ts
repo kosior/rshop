@@ -11,6 +11,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/skip';
+import {environment} from '../../../environments/environment';
 
 
 interface ApiAuthResponse {
@@ -20,9 +21,9 @@ interface ApiAuthResponse {
 
 @Injectable()
 export class AuthService {
-  private loginUrl = 'http://127.0.0.1:8000/api-token-auth/';
-  private registerUrl = 'http://127.0.0.1:8000/register/';
-  private refreshTokenUrl = 'http://127.0.0.1:8000/api-token-refresh/';
+  private loginUrl = environment.apiBaseUrl + 'api-token-auth/';
+  private registerUrl = environment.apiBaseUrl + 'register/';
+  private refreshTokenUrl = environment.apiBaseUrl + 'api-token-refresh/';
 
   private userSubject: Subject<User|null> = new ReplaySubject(1);
   public user$ = this.userSubject.asObservable();
