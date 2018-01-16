@@ -23,6 +23,10 @@ import { AuthGuard } from './services/auth-guard/auth-guard.service';
 import { JwtService } from './services/jwt/jwt.service';
 import { RegisterComponent } from './register/register.component';
 import { AdminAuthGuard } from './services/admin-auth-guard/admin-auth-guard.service';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import {CategoryService} from './services/category/category.service';
+import {ProductService} from './services/product/product.service';
+import {CustomFormsModule} from 'ng2-validation';
 
 
 @NgModule({
@@ -38,19 +42,21 @@ import { AdminAuthGuard } from './services/admin-auth-guard/admin-auth-guard.ser
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProductFormComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    CustomFormsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {
           return localStorage.getItem('token');
         },
         whitelistedDomains: ['127.0.0.1:8000'],
-        authScheme: 'JWT'
+        authScheme: 'JWT '
 
       }
     }),
@@ -66,6 +72,8 @@ import { AdminAuthGuard } from './services/admin-auth-guard/admin-auth-guard.ser
       { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuard] },
       { path: 'my/orders', component: MyOrdersComponent, canActivate: [AuthGuard] },
 
+      { path: 'admin/products/new', component: ProductFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+      { path: 'admin/products/:id', component: ProductFormComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard, AdminAuthGuard] },
       { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard, AdminAuthGuard] },
     ])
@@ -74,7 +82,9 @@ import { AdminAuthGuard } from './services/admin-auth-guard/admin-auth-guard.ser
     AuthService,
     AuthGuard,
     AdminAuthGuard,
-    JwtService
+    JwtService,
+    CategoryService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })
