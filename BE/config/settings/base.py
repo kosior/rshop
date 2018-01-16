@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'common',
-    'shop.users',
+    'users',
+    'categories',
 ]
 
 SITE_ID = 1
