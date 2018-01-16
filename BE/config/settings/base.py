@@ -1,8 +1,8 @@
+import datetime
 import os
 import socket
 
 import environ
-
 
 ROOT_DIR = environ.Path(__file__) - 3
 APPS_DIR = ROOT_DIR.path('shop')
@@ -169,6 +169,7 @@ REST_FRAMEWORK = {
 JWT_AUTH = {
     'JWT_ALLOW_REFRESH': True,
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'common.helpers.jwt_response_payload_handler',
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=60*60*24*7),
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
