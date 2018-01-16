@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'common',
     'users',
     'categories',
+    'products',
 ]
 
 SITE_ID = 1
