@@ -13,7 +13,7 @@ export class ProductService {
   }
 
   getAll() {
-    return this.http.get(this.productsUrl);
+    return this.http.get<any[]>(this.productsUrl);
   }
 
   get(productId) {
