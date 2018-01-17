@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
+import {Product} from '../../models/product.model';
 
 @Injectable()
 export class ProductService {
@@ -13,11 +14,11 @@ export class ProductService {
   }
 
   getAll() {
-    return this.http.get<any[]>(this.productsUrl);
+    return this.http.get<Product[]>(this.productsUrl);
   }
 
   get(productId) {
-    return this.http.get(this.productsUrl + productId + '/');
+    return this.http.get<Product>(this.productsUrl + productId + '/');
   }
 
   update(productId, product) {
