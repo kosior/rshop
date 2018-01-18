@@ -26,6 +26,8 @@ import {CategoryService} from './services/category/category.service';
 import {ProductService} from './services/product/product.service';
 import {CustomFormsModule} from 'ng2-validation';
 import {DataTableModule} from 'angular5-data-table';
+import { ProductFilterComponent } from './products/product-filter/product-filter.component';
+import { ProductCardComponent } from './product-card/product-card.component';
 
 
 @NgModule({
@@ -43,6 +45,8 @@ import {DataTableModule} from 'angular5-data-table';
     LoginComponent,
     RegisterComponent,
     ProductFormComponent,
+    ProductFilterComponent,
+    ProductCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +66,7 @@ import {DataTableModule} from 'angular5-data-table';
     }),
     NgbModule.forRoot(),
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
+      { path: '', component: ProductsComponent },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'products', component: ProductsComponent },

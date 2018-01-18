@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
+import {Category} from '../../models/category.model';
 
 @Injectable()
 export class CategoryService {
@@ -9,6 +10,6 @@ export class CategoryService {
   constructor(private http: HttpClient) { }
 
   getCategories() {
-    return this.http.get(this.categoriesUrl, {params: {ordering: 'name'}});
+    return this.http.get<Category[]>(this.categoriesUrl, {params: {ordering: 'name'}});
   }
 }
