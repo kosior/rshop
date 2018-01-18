@@ -8,4 +8,4 @@ from .serializers import ProductSerializer
 class ProductViewSet(ModelViewSet):
     serializer_class = ProductSerializer
     permission_classes = (AllowAny,)
-    queryset = Product.objects.all()
+    queryset = Product.objects.select_related('category').all()
