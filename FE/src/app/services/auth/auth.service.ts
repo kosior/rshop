@@ -33,9 +33,7 @@ export class AuthService {
     private http: HttpClient,
     private jwtService: JwtService,
     private router: Router,
-  ) {
-      this.refreshToken();
-  }
+  ) {}
 
   _post_auth(data, url) {
     return this.http.post<ApiAuthResponse>(url, data)

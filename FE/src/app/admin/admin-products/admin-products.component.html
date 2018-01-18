@@ -6,21 +6,20 @@
   <input #query (keyup)="filter(query.value)" type="text" class="form-control" placeholder="Search...">
 </p>
 
-<table class="table">
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Price</th>
-    <th></th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let p of filteredProducts ">
-    <td>{{ p.name }}</td>
-    <td>{{ p.price | currency:'USD':'symbol' }}</td>
-    <td>
-      <a [routerLink]="['/admin/products/', p.id]">Edit</a>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<data-table [items]="items" [itemCount]="itemCount" (reload)="reloadItems($event)">
+
+  <data-table-column [property]="'name'" [header]="'Name'" [sortable]="true" [resizable]="true"></data-table-column>
+
+  <data-table-column [property]="'price'" [header]="'Price'" [sortable]="true" [resizable]="true">
+    <ng-template #dataTableCell let-item="item">
+      {{ item.price | currency:'USD':'symbol' }}
+    </ng-template>
+  </data-table-column>
+
+  <data-table-column [property]="'id'">
+    <ng-template #dataTableCell let-item="item">
+      <a [routerLink]="['/admin/products/', item.id]">Edit</a>
+    </ng-template>
+  </data-table-column>
+
+</data-table>
