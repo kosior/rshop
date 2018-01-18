@@ -164,7 +164,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     ),
-
+    'COERCE_DECIMAL_TO_STRING': False,
 }
 
 JWT_AUTH = {
