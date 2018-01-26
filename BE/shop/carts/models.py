@@ -14,7 +14,7 @@ class Cart(BaseModel):
 class Item(BaseModel):
     cart = models.ForeignKey(Cart, related_name='items')
     product = models.ForeignKey(Product, related_name='+')
-    quantity = models.PositiveSmallIntegerField()
+    quantity = models.PositiveSmallIntegerField(default=1)
 
     class Meta:
         unique_together = ('cart', 'product')
