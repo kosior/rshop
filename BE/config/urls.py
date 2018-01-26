@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^api-token-refresh/', refresh_jwt_token),
     url(r'^', include(router.urls)),
     url(r'^categories/', include('categories.urls')),
+    url(r'^carts/', include('carts.urls')),
     url(r'^admin/', admin.site.urls),
 ]
 
