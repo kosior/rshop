@@ -26,8 +26,9 @@ import {CategoryService} from './services/category/category.service';
 import {ProductService} from './services/product/product.service';
 import {CustomFormsModule} from 'ng2-validation';
 import {DataTableModule} from 'angular5-data-table';
-import { ProductFilterComponent } from './products/product-filter/product-filter.component';
-import { ProductCardComponent } from './product-card/product-card.component';
+import {ProductFilterComponent} from './products/product-filter/product-filter.component';
+import {ProductCardComponent} from './product-card/product-card.component';
+import {ShoppingCartService} from './services/shopping-cart/shopping-cart.service';
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import { ProductCardComponent } from './product-card/product-card.component';
     AdminAuthGuard,
     JwtService,
     CategoryService,
-    ProductService
+    ProductService,
+    ShoppingCartService
   ],
   bootstrap: [AppComponent]
 })
