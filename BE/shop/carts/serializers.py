@@ -1,6 +1,18 @@
 from rest_framework.serializers import ModelSerializer
 
-from .models import Cart
+from .models import Cart, Item
+
+
+class ItemSerializer(ModelSerializer):
+    class Meta:
+        model = Item
+        fields = ('product', 'quantity')
+        read_only_fields = ('quantity',)
+
+
+class ItemsSerializer(ItemSerializer):
+    def to_representation(self, instance):
+        return {item.product_id: {'quantity': item.quantity} for item in instance}
 
 
 class CartSerializer(ModelSerializer):
