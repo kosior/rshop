@@ -5,7 +5,10 @@
     <h6 class="card-subtitle mb-2 text-muted">{{ product.price | currency:'USD':'symbol' }}</h6>
     <p class="card-text">{{ product.description }}</p>
   </div>
-  <div class="card-footer">
-    <a *ngIf="showActions" href="#" class="btn btn-primary btn-block">Add to Cart</a>
+  <div *ngIf="showActions" class="card-footer">
+    <button
+      (click)="addToCart(product)"
+      class="btn btn-primary btn-block">Add to Cart</button>
+    <div>{{ getQuantity() }}</div>
   </div>
 </div>

@@ -1,24 +1,37 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProductService} from '../services/product/product.service';
 import {ActivatedRoute} from '@angular/router';
 import {Product} from '../models/product.model';
 import 'rxjs/add/operator/switchMap';
+import {ShoppingCartService} from '../services/shopping-cart/shopping-cart.service';
+import {Item} from '../models/item.model';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   filteredProducts: Product[] = [];
   category: string;
+  items: Item[];
+  subscription: Subscription;
 
-  constructor(route: ActivatedRoute, productService: ProductService) {
-    productService.getAll()
+  constructor(private route: ActivatedRoute, private productService: ProductService, private cartService: ShoppingCartService) { }
+
+  ngOnInit() {
+    this.cartService.initializeItems();
+    this.subscription = this.cartService.items$
+      .subscribe(items => {
+        this.items = items;
+      });
+
+    this.productService.getAll()
       .switchMap(products => {
         this.products = products;
-        return route.queryParamMap;
+        return this.route.queryParamMap;
       })
       .subscribe(params => {
         this.category = params.get('category');
@@ -27,5 +40,9 @@ export class ProductsComponent {
           this.products.filter(p => p.category_slug === this.category) :
           this.products;
       });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
