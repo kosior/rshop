@@ -5,7 +5,7 @@ import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs/Observable';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
 import {Subject} from 'rxjs/Subject';
-import {Item} from '../../models/item.model';
+import {Items} from '../../models/items.model';
 
 
 interface ApiCartResponse {
@@ -18,7 +18,7 @@ interface ApiCartResponse {
 @Injectable()
 export class ShoppingCartService {
   private cartsUrl = environment.apiBaseUrl + 'carts/';
-  private itemsSubject: Subject<Item[]> = new ReplaySubject(1);
+  private itemsSubject: Subject<Items> = new ReplaySubject(1);
   public items$ = this.itemsSubject.asObservable();
 
   constructor(private http: HttpClient) { }
@@ -34,7 +34,7 @@ export class ShoppingCartService {
   public initializeItems() {
     return this.getOrCreateCartId()
       .take(1)
-      .switchMap(cartId => this.http.get<Item[]>(this.getItemsUrl(cartId)))
+      .switchMap(cartId => this.http.get<Items>(this.getItemsUrl(cartId)))
       .subscribe(items => { this.itemsSubject.next(items); });
   }
 
@@ -55,7 +55,7 @@ export class ShoppingCartService {
     this.getOrCreateCartId()
       .take(1)
       .subscribe(cartId => {
-        this.http.post<Item[]>(this.getItemsUrl(cartId), {product: productId, quantity: quantity})
+        this.http.post<Items>(this.getItemsUrl(cartId), {product: productId, quantity: quantity})
           .do(items => { this.itemsSubject.next(items); })
           .subscribe();
       });

@@ -1,5 +1,3 @@
 export interface Item {
-  [id: string]: {
-    quantity: number
-  };
+  quantity: number;
 }
