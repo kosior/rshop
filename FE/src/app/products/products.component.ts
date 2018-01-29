@@ -4,7 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {Product} from '../models/product.model';
 import 'rxjs/add/operator/switchMap';
 import {ShoppingCartService} from '../services/shopping-cart/shopping-cart.service';
-import {Items} from '../models/items.model';
+import {Items} from '../models/item.model';
 import {Subscription} from 'rxjs/Subscription';
 
 @Component({
@@ -22,10 +22,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private productService: ProductService, private cartService: ShoppingCartService) { }
 
   ngOnInit() {
-    this.cartService.initializeItems();
-    this.subscription = this.cartService.items$
-      .subscribe(items => {
-        this.items = items;
+    this.cartService.initializeCart();
+    this.subscription = this.cartService.cart$
+      .subscribe(cart => {
+        this.items = cart.items;
       });
 
     this.productService.getAll()
