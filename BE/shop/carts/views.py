@@ -20,12 +20,17 @@ class ItemsViewSet(GenericAPIView):
         return Item.objects.filter(cart_id=self.kwargs['cart_uuid'])
 
     def create_or_update(self, request, *args, **kwargs):
-        cart_uuid = kwargs.get('cart_uuid')
+        item_kwargs = {'cart_id': kwargs.get('cart_uuid'), 'product_id': request.data['product']}
+        quantity_kwarg_map = {1: {'quantity__gte': 0}, -1: {'quantity__gte': 1}}
+        quantity = int(request.data['quantity'])
 
-        rows_updated = Item.objects.filter(cart_id=cart_uuid, **request.data).update(quantity=F('quantity') + 1)
+        assert quantity in (1, -1)
 
-        if rows_updated == 0:
-            Item.objects.create(cart_id=cart_uuid, **request.data)
+        rows_updated = Item.objects.filter(**item_kwargs,
+                                           **quantity_kwarg_map[quantity]).update(quantity=F('quantity') + quantity)
+
+        if rows_updated == 0 and quantity == 1:
+            Item.objects.create(**item_kwargs)
 
     def retrieve(self, request, *args, **kwargs):
         items = self.get_queryset()

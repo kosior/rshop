@@ -7,7 +7,6 @@ class ItemSerializer(ModelSerializer):
     class Meta:
         model = Item
         fields = ('product', 'quantity')
-        read_only_fields = ('quantity',)
 
 
 class ItemsSerializer(ItemSerializer):
