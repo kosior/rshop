@@ -38,11 +38,6 @@ export class ShoppingCartService {
       .subscribe(items => { this.itemsSubject.next(items); });
   }
 
-  private createOrUpdateItem(cartId: string, productId: number) {
-    return this.http.post<Item[]>(this.getItemsUrl(cartId), {product_id: productId})
-      .do(items => { this.itemsSubject.next(items); });
-  }
-
   private getOrCreateCartId(): Observable<string> {
     const cartId = localStorage.getItem('cartId');
     if (cartId) {
@@ -56,11 +51,21 @@ export class ShoppingCartService {
       });
   }
 
-  addToCart(product: Product) {
+  private updateProductQuantity(productId: number, quantity: 1 | -1) {
     this.getOrCreateCartId()
       .take(1)
       .subscribe(cartId => {
-        this.createOrUpdateItem(cartId, product.id).subscribe();
+        this.http.post<Item[]>(this.getItemsUrl(cartId), {product: productId, quantity: quantity})
+          .do(items => { this.itemsSubject.next(items); })
+          .subscribe();
       });
+  }
+
+  addToCart(product: Product) {
+    this.updateProductQuantity(product.id, 1);
+  }
+
+  removeFromCart(product: Product) {
+    this.updateProductQuantity(product.id, -1);
   }
 }
