@@ -22,7 +22,9 @@ export class ShoppingCartService {
   private cartSubject: Subject<Cart> = new ReplaySubject(1);
   public cart$ = this.cartSubject.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.initializeCart();
+  }
 
   private getItemsUrl(cartId: string): string {
     return this.cartsUrl + cartId + /items/;
@@ -32,11 +34,12 @@ export class ShoppingCartService {
     return this.http.post<ApiCartResponse>(this.cartsUrl, {});
   }
 
-  public initializeCart() {
-    return this.getOrCreateCartId()
-      .take(1)
-      .switchMap(cartId => this.http.get<Items>(this.getItemsUrl(cartId)))
-      .subscribe(items => { this.cartSubject.next(new Cart(items)); });
+  private initializeCart() {
+    const cartId = localStorage.getItem('cartId');
+    if (cartId) {
+      this.http.get<Items>(this.getItemsUrl(cartId))
+        .subscribe(items => this.cartSubject.next(new Cart(items)));
+    }
   }
 
   private getOrCreateCartId(): Observable<string> {
