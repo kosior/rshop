@@ -17,7 +17,7 @@ class ItemsViewSet(GenericAPIView):
     permission_classes = (AllowAny,)
 
     def get_queryset(self):
-        return Item.objects.filter(cart_id=self.kwargs['cart_uuid'])
+        return Item.objects.filter(cart_id=self.kwargs['cart_uuid']).select_related('product')
 
     def create_or_update(self, request, *args, **kwargs):
         item_kwargs = {'cart_id': kwargs.get('cart_uuid'), 'product_id': request.data['product']}

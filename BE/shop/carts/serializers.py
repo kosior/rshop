@@ -11,7 +11,7 @@ class ItemSerializer(ModelSerializer):
 
 class ItemsSerializer(ItemSerializer):
     def to_representation(self, instance):
-        return {item.product_id: {'quantity': item.quantity} for item in instance}
+        return {item.product_id: item.to_dict() for item in instance}
 
 
 class CartSerializer(ModelSerializer):
