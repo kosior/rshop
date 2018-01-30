@@ -1,15 +1,28 @@
-import {Items} from './item.model';
+import {ItemM, Items} from './item.model';
 
 export class Cart {
-  constructor(public items: Items) {
-    this.items = items;
+  items: ItemM[] = [];
+
+  constructor(public itemsMap: Items = {}) {
+    for (const itemId of Object.keys(this.itemsMap)) {
+      const item = this.itemsMap[itemId];
+      this.items.push(new ItemM(item));
+    }
   }
 
   get totalItemsCount() {
     let count = 0;
-    for (const item_key of Object.keys(this.items)) {
-      count += this.items[item_key].quantity;
+    for (const item of this.items) {
+      count += item.quantity;
     }
     return count;
+  }
+
+  get totalPrice() {
+    let sum = 0;
+    for (const item of this.items) {
+      sum += item.totalPrice;
+    }
+    return sum;
   }
 }

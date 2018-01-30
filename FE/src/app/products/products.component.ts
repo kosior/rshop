@@ -22,10 +22,9 @@ export class ProductsComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private productService: ProductService, private cartService: ShoppingCartService) { }
 
   ngOnInit() {
-    this.cartService.initializeCart();
     this.subscription = this.cartService.cart$
       .subscribe(cart => {
-        this.items = cart.items;
+        this.items = cart.itemsMap;
       });
 
     this.productService.getAll()
