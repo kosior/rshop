@@ -5,11 +5,13 @@ export interface Item {
 }
 
 export class ItemM implements Item {
+  id: number;
   quantity: number;
   name: string;
   price: number;
 
-  constructor(item: Item) {
+  constructor(id: string, item: Item) {
+    this.id = +id;
     this.quantity = item.quantity;
     this.name = item.name;
     this.price = item.price;
