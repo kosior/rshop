@@ -10,11 +10,8 @@ export class ItemM implements Item {
   name: string;
   price: number;
 
-  constructor(id: string, item: Item) {
-    this.id = +id;
-    this.quantity = item.quantity;
-    this.name = item.name;
-    this.price = item.price;
+  constructor(init?: Partial<ItemM>) {
+    Object.assign(this, init);
   }
 
   get totalPrice() {
