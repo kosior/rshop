@@ -2,6 +2,7 @@ export interface Item {
   quantity: number;
   name: string;
   price: number;
+  image_url: string;
 }
 
 export class ItemM implements Item {
@@ -9,6 +10,7 @@ export class ItemM implements Item {
   quantity: number;
   name: string;
   price: number;
+  image_url: string;
 
   constructor(init?: Partial<ItemM>) {
     Object.assign(this, init);
