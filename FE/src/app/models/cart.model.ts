@@ -4,7 +4,7 @@ import {Product} from './product.model';
 export class Cart {
   items: ItemM[] = [];
 
-  constructor(public itemsMap: Items = {}) {
+  constructor(private itemsMap: Items = {}) {
     for (const itemId of Object.keys(this.itemsMap)) {
       const item = this.itemsMap[itemId];
       this.items.push(new ItemM({...item, id: +itemId}));
