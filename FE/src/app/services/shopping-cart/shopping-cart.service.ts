@@ -26,6 +26,22 @@ export class ShoppingCartService {
     this.initializeCart();
   }
 
+  addToCart(product: Product) {
+    this.updateProductQuantity(product.id, 1);
+  }
+
+  removeFromCart(product: Product) {
+    this.updateProductQuantity(product.id, -1);
+  }
+
+  clearCart() {
+    const cartId = localStorage.getItem('cartId');
+    if (cartId) {
+      this.http.delete(this.getItemsUrl(cartId))
+        .subscribe(() => this.cartSubject.next(new Cart()));
+    }
+  }
+
   private getItemsUrl(cartId: string): string {
     return this.cartsUrl + cartId + /items/;
   }
@@ -63,13 +79,5 @@ export class ShoppingCartService {
           .do(items => { this.cartSubject.next(new Cart(items)); })
           .subscribe();
       });
-  }
-
-  addToCart(product: Product) {
-    this.updateProductQuantity(product.id, 1);
-  }
-
-  removeFromCart(product: Product) {
-    this.updateProductQuantity(product.id, -1);
   }
 }

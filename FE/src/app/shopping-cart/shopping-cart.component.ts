@@ -14,4 +14,8 @@ export class ShoppingCartComponent implements OnInit {
   ngOnInit() {
     this.cart$ = this.cartService.cart$;
   }
+
+  clearCart() {
+    this.cartService.clearCart();
+  }
 }
