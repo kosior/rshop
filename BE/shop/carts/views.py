@@ -43,3 +43,8 @@ class ItemsViewSet(GenericAPIView):
     def post(self, request, *args, **kwargs):
         self.create_or_update(request, *args, **kwargs)
         return self.retrieve(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        cart_uuid = kwargs.get('cart_uuid')
+        deleted_num, _ = Item.objects.filter(cart_id=cart_uuid).delete()
+        return Response({'deleted_num': deleted_num})
