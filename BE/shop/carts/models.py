@@ -29,5 +29,6 @@ class Item(BaseModel):
         return {
             'quantity': self.quantity,
             'name': self.product.name,
-            'price': self.product.price
+            'price': self.product.price,
+            'image_url': self.product.image_url,
         }
