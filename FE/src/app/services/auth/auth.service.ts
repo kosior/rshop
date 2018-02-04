@@ -48,6 +48,7 @@ export class AuthService {
         }
       })
       .catch((error: any) => {
+        this.jwtService.removeToken();
         return Observable.of(false);
       });
   }
