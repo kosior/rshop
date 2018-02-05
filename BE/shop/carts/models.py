@@ -1,6 +1,8 @@
 import uuid
+
 from django.db import models
 
+from common.items.models import BaseItem
 from common.models import BaseModel
 from products.models import Product
 from users.models import User
@@ -14,10 +16,8 @@ class Cart(BaseModel):
         return str(self.uuid)
 
 
-class Item(BaseModel):
+class Item(BaseItem):
     cart = models.ForeignKey(Cart, related_name='items')
-    product = models.ForeignKey(Product, related_name='+')
-    quantity = models.PositiveSmallIntegerField(default=1)
 
     class Meta:
         unique_together = ('cart', 'product')
