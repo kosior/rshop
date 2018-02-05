@@ -13,3 +13,13 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     objects = UserManager()
+
+
+class Address(models.Model):
+    name = models.CharField(max_length=256, blank=True)
+    address_line_1 = models.CharField(max_length=256, blank=True)
+    address_line_2 = models.CharField(max_length=256, blank=True)
+    city = models.CharField(max_length=256, blank=True)
+
+    def __str__(self):
+        return self.name
