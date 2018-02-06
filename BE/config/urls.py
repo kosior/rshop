@@ -5,11 +5,13 @@ from django.contrib import admin
 from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
+from orders.views import OrderViewSet
 from products.views import ProductViewSet
 from users.views import CreateUser
 
 router = DefaultRouter()
 router.register(r'products', ProductViewSet)
+router.register(r'orders', OrderViewSet, base_name='Order')
 
 urlpatterns = [
     url(r'^register', CreateUser.as_view()),
