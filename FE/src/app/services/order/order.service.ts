@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class OrderService {
@@ -8,8 +9,8 @@ export class OrderService {
 
   constructor(private http: HttpClient) { }
 
-  saveOrder(order) {
-    this.http.post(this.saveOrderUrl, order).subscribe();
+  saveOrder(order): Observable<any> {
+    return this.http.post(this.saveOrderUrl, order);
   }
 
 }
