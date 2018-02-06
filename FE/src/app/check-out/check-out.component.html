@@ -1,6 +1,8 @@
 <h2>Shipping</h2>
 
-<form #f="ngForm">
+<div class="row">
+  <div class="col-6">
+    <form #f="ngForm">
   <div class="form-group">
     <label for="">Name</label>
     <input #name="ngModel" name="name" [(ngModel)]="address.name" type="text" class="form-control" required>
@@ -33,3 +35,8 @@
     (click)="placeOrder()"
     class="btn btn-primary">Place Order</button>
 </form>
+  </div>
+  <div class="col-6">
+    <shopping-cart-summary [cart]="cart"></shopping-cart-summary>
+  </div>
+</div>
