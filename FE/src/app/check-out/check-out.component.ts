@@ -28,7 +28,7 @@ export class CheckOutComponent implements OnInit, OnDestroy {
 
   placeOrder() {
     const order = new Order(this.address, this.cart);
-    this.orderService.saveOrder(order)
+    this.orderService.placeOrder(order)
       .subscribe(result => this.router.navigate(['/order-success', result.uuid]));
   }
 }
