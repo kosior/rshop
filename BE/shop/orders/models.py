@@ -12,7 +12,7 @@ class Order(BaseModel):
     user = models.ForeignKey(User, related_name='orders')
     address = models.ForeignKey(Address, related_name='orders')
     confirmed = models.BooleanField(default=False)
-    total = models.PositiveIntegerField()
+    total = models.DecimalField(max_digits=30, decimal_places=2, blank=True, null=True)
 
     def __str__(self):
         return str(self.uuid)[:8]
