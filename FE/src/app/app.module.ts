@@ -30,6 +30,7 @@ import {ProductFilterComponent} from './products/product-filter/product-filter.c
 import {ProductCardComponent} from './product-card/product-card.component';
 import {ShoppingCartService} from './services/shopping-cart/shopping-cart.service';
 import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
+import {OrderService} from './services/order/order.service';
 
 
 @NgModule({
@@ -92,7 +93,8 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
     JwtService,
     CategoryService,
     ProductService,
-    ShoppingCartService
+    ShoppingCartService,
+    OrderService
   ],
   bootstrap: [AppComponent]
 })
