@@ -55,6 +55,8 @@ export class ShoppingCartService {
     if (cartId) {
       this.http.get<Items>(this.getItemsUrl(cartId))
         .subscribe(items => this.cartSubject.next(new Cart(items)));
+    } else {
+      this.cartSubject.next(new Cart());
     }
   }
 
@@ -65,7 +67,7 @@ export class ShoppingCartService {
     }
 
     return this.create()
-      .switchMap(result => {
+      .map(result => {
         localStorage.setItem('cartId', result.uuid);
         return result.uuid;
       });
