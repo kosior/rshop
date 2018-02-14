@@ -1,3 +1,50 @@
-<p>
-  admin-orders works!
-</p>
+<h2>Orders</h2>
+
+<table class="table" *ngIf="orders$ | async as orders">
+    <thead>
+    <tr>
+      <th>Customer</th>
+      <th>Date</th>
+      <th>Details</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.user_email }}</td>
+      <td>{{ order.created | date:'dd.MM.yyyy HH:mm:SS' }}</td>
+      <td>
+        <ng-template #popOrderContent>
+          <div class="row">
+            <div class="col-4 text-right">Total:</div>
+            <div class="col-8">{{ order.total | currency:'USD':'symbol' }}</div>
+
+            <div class="col-4 text-right">Name:</div>
+            <div class="col-8">{{ order.address.name }}</div>
+
+            <div class="col-4 text-right">Address line 1:</div>
+            <div class="col-8">{{ order.address.address_line_1 }}</div>
+
+            <div class="col-4 text-right">Address line 2:</div>
+            <div class="col-8">{{ order.address.address_line_2 }}</div>
+
+            <div class="col-4 text-right">City:</div>
+            <div class="col-8">{{ order.address.city }}</div>
+
+            <div class="col-4 text-right">Products:</div>
+            <div *ngFor="let item of order.items" class="col-8 offset-4">
+              {{ item.quantity }} x {{ item.product_name }} ({{ item.product_price | currency:'USD':'symbol' }})</div>
+          </div>
+
+        </ng-template>
+        <button
+          class="btn btn-success"
+          [ngbPopover]="popOrderContent"
+          popoverTitle="Order Details"
+          container="body"
+          placement="left"
+          triggers="mouseenter:mouseleave"><i class="fa fa-info" aria-hidden="true"></i></button>
+      </td>
+    </tr>
+    </tbody>
+</table>
+
