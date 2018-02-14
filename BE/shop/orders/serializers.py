@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, EmailField, CharField, DecimalField
 
 from users.models import Address
 from users.serializers import AddressSerializer
@@ -6,19 +6,23 @@ from .models import Order, OrderItem
 
 
 class OrderItemSerializer(ModelSerializer):
+    product_name = CharField(source='product.name', read_only=True)
+    product_price = DecimalField(max_digits=15, decimal_places=2, source='product.price', read_only=True)
+
     class Meta:
         model = OrderItem
-        fields = ('product', 'quantity')
+        fields = ('product', 'quantity', 'product_name', 'product_price')
 
 
 class OrderSerializer(ModelSerializer):
     address = AddressSerializer()
     items = OrderItemSerializer(many=True)
+    user_email = EmailField(source='user.email', read_only=True)
 
     class Meta:
         model = Order
-        fields = ('uuid', 'user', 'confirmed', 'total', 'address', 'items')
-        read_only_fields = ('uuid', 'user', 'confirmed', 'total')
+        fields = ('uuid', 'user', 'confirmed', 'total', 'address', 'items', 'user_email', 'created')
+        read_only_fields = ('uuid', 'user', 'confirmed', 'total', 'created')
 
     def create(self, validated_data):
         total = 0
