@@ -6,13 +6,17 @@ import {ShoppingCartService} from '../shopping-cart/shopping-cart.service';
 
 @Injectable()
 export class OrderService {
-  private saveOrderUrl = environment.apiBaseUrl + 'orders/';
+  private ordersUrl = environment.apiBaseUrl + 'orders/';
 
   constructor(private http: HttpClient, private cartService: ShoppingCartService) { }
 
   placeOrder(order): Observable<any> {
-    return this.http.post(this.saveOrderUrl, order)
+    return this.http.post(this.ordersUrl, order)
       .do(() => this.cartService.clearCart());
+  }
+
+  getOrders() {
+    return this.http.get(this.ordersUrl);
   }
 
 }
