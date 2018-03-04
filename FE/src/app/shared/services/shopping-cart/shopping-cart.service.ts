@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Product} from '../../models/product.model';
-import {environment} from '../../../environments/environment';
+import {Product} from 'shared/models/product.model';
+import {environment} from '../../../../environments/environment';
 import {Observable} from 'rxjs/Observable';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
 import {Subject} from 'rxjs/Subject';
-import {Cart} from '../../models/cart.model';
-import {Items} from '../../models/item.model';
+import {Cart} from 'shared/models/cart.model';
+import {Items} from 'shared/models/item.model';
 
 
 interface ApiCartResponse {

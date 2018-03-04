@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Order} from '../models/order.model';
-import {OrderService} from '../services/order/order.service';
+import {Order} from 'shared/models/order.model';
+import {OrderService} from 'shared/services/order/order.service';
 import {Router} from '@angular/router';
-import {Cart} from '../models/cart.model';
+import {Cart} from 'shared/models/cart.model';
 
 @Component({
   selector: 'shipping-form',

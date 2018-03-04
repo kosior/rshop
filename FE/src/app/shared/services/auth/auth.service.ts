@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Router} from '@angular/router';
 import {JwtService} from '../jwt/jwt.service';
-import {User} from '../../models/user.model';
+import {User} from 'shared/models/user.model';
 import {Subject} from 'rxjs/Subject';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
 import 'rxjs/add/operator/map';
@@ -11,7 +11,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/skip';
-import {environment} from '../../../environments/environment';
+import {environment} from '../../../../environments/environment';
 
 
 interface ApiAuthResponse {

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
-import {Product} from '../../models/product.model';
+import {environment} from '../../../../environments/environment';
+import {Product} from 'shared/models/product.model';
 
 @Injectable()
 export class ProductService {

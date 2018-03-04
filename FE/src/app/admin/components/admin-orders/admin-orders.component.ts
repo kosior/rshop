@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
-import {OrderService} from '../../services/order/order.service';
+import {OrderService} from 'shared/services/order/order.service';
 
 @Component({
   encapsulation: ViewEncapsulation.None,

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
-import {Category} from '../../models/category.model';
+import {environment} from '../../../../environments/environment';
+import {Category} from 'shared/models/category.model';
 
 @Injectable()
 export class CategoryService {
