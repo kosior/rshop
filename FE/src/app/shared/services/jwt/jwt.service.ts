@@ -39,7 +39,12 @@ export class JwtService {
 
   tokenNotExpired() {
     const token: string = this.jwtHelper.tokenGetter();
-    return token != null && !this.jwtHelper.isTokenExpired(token);
+    if (token != null) {
+      if (!this.jwtHelper.isTokenExpired(token)) {
+        return true;
+      }
+      this.removeToken();
+    }
+    return false;
   }
-
 }
