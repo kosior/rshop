@@ -3,34 +3,30 @@ import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AppComponent} from './app.component';
-import {BsNavbarComponent} from './bs-navbar/bs-navbar.component';
-import {HomeComponent} from './home/home.component';
 import {ProductsComponent} from './shopping/components/products/products.component';
-import {LoginComponent} from './login/login.component';
+import {LoginComponent} from './core/components/login/login.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {JwtModule} from '@auth0/angular-jwt';
-import {RegisterComponent} from './register/register.component';
+import {RegisterComponent} from './core/components/register/register.component';
 import {CustomFormsModule} from 'ng2-validation';
 import {DataTableModule} from 'angular5-data-table';
 import {SharedModule} from 'shared/shared.module';
 import {AdminModule} from './admin/admin.module';
 import {ShoppingModule} from './shopping/shopping.module';
+import {CoreModule} from './core/core.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    BsNavbarComponent,
-    HomeComponent,
-    LoginComponent,
-    RegisterComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
     SharedModule,
     AdminModule,
     ShoppingModule,
+    CoreModule,
     HttpClientModule,
     FormsModule,
     CustomFormsModule,
