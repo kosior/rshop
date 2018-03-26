@@ -7,6 +7,7 @@ from .serializers import CategorySerializer
 
 
 class CategoriesList(ListAPIView):
+    authentication_classes = []
     serializer_class = CategorySerializer
     permission_classes = (AllowAny,)
     queryset = Category.objects.all()

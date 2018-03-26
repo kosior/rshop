@@ -8,11 +8,13 @@ from .serializers import CartSerializer, ItemsSerializer
 
 
 class CreateCart(CreateAPIView):
+    authentication_classes = []
     serializer_class = CartSerializer
     permission_classes = (AllowAny,)
 
 
 class ItemsViewSet(GenericAPIView):
+    authentication_classes = []
     serializer_class = ItemsSerializer
     permission_classes = (AllowAny,)
 
