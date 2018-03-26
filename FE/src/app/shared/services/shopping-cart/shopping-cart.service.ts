@@ -35,7 +35,9 @@ export class ShoppingCartService {
   }
 
   clearCart() {
-    const cartId = localStorage.getItem('cartId');
+    const key = 'cartId';
+    const cartId = localStorage.getItem(key);
+    localStorage.removeItem(key);
     if (cartId) {
       this.http.delete(this.getItemsUrl(cartId))
         .subscribe(() => this.cartSubject.next(new Cart()));
