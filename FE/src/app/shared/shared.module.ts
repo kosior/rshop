@@ -9,10 +9,18 @@ import {CategoryService} from 'shared/services/category/category.service';
 import {ShoppingCartService} from 'shared/services/shopping-cart/shopping-cart.service';
 import {ProductService} from 'shared/services/product/product.service';
 import {JwtService} from 'shared/services/jwt/jwt.service';
+import {FormsModule} from '@angular/forms';
+import {CustomFormsModule} from 'ng2-validation';
+import {DataTableModule} from 'angular5-data-table';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    CustomFormsModule,
+    DataTableModule,
+    NgbModule.forRoot(),
   ],
   declarations: [
     ProductCardComponent,
@@ -20,7 +28,12 @@ import {JwtService} from 'shared/services/jwt/jwt.service';
   ],
   exports: [
     ProductCardComponent,
-    ProductQuantityComponent
+    ProductQuantityComponent,
+    CommonModule,
+    FormsModule,
+    CustomFormsModule,
+    DataTableModule,
+    NgbModule.forRoot().ngModule,
   ],
   providers: [
     AuthService,
