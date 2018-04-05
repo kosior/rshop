@@ -24,11 +24,3 @@ class Item(BaseItem):
 
     def __str__(self):
         return f'{str(self.cart_id)[:8]} - {self.product_id}'
-
-    def to_dict(self):
-        return {
-            'quantity': self.quantity,
-            'name': self.product.name,
-            'price': self.product.price,
-            'image_url': self.product.image_url,
-        }

@@ -11,7 +11,15 @@ class ItemSerializer(ModelSerializer):
 
 class ItemsSerializer(ItemSerializer):
     def to_representation(self, instance):
-        return {item.product_id: item.to_dict() for item in instance}
+        return {item.product_id: self.item_to_dict(item) for item in instance}
+
+    def item_to_dict(self, item):
+        return {
+            'quantity': item.quantity,
+            'name': item.product.name,
+            'price': item.product.price,
+            'image_url': self.context['request'].build_absolute_uri(item.product.image_url)
+        }
 
 
 class CartSerializer(ModelSerializer):

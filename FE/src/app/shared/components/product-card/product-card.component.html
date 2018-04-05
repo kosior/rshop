@@ -1,5 +1,5 @@
 <div *ngIf="product.name" class="card">
-  <img class="card-img-top" [src]="product.image_url" *ngIf="product.image_url" alt="{{ product.title }}">
+  <img class="card-img-top" [src]="product.image" *ngIf="product.image" alt="{{ product.title }}">
   <div class="card-body">
     <h5 class="card-title">{{ product.name }}</h5>
     <h6 class="card-subtitle mb-2 text-muted">{{ product.price | currency:'USD':'symbol' }}</h6>
