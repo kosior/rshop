@@ -12,6 +12,9 @@ import {AdminModule} from './admin/admin.module';
 import {ShoppingModule} from './shopping/shopping.module';
 import {CoreModule} from './core/core.module';
 
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [
@@ -26,10 +29,8 @@ import {CoreModule} from './core/core.module';
     HttpClientModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => {
-          return localStorage.getItem('token');
-        },
-        whitelistedDomains: ['127.0.0.1:8000'],
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['127.0.0.1:8000', 'rshop.ksrk.tech'],
         authScheme: 'JWT '
       }
     }),
