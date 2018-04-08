@@ -4,6 +4,11 @@ import {OrderService} from 'shared/services/order/order.service';
 import {Router} from '@angular/router';
 import {Cart} from 'shared/models/cart.model';
 
+
+interface AddressObject {
+    [key: string]: any;
+}
+
 @Component({
   selector: 'shipping-form',
   templateUrl: './shipping-form.component.html',
@@ -11,7 +16,7 @@ import {Cart} from 'shared/models/cart.model';
 })
 export class ShippingFormComponent implements OnInit {
   @Input('cart') cart: Cart;
-  address = {};
+  address: AddressObject = {};
 
   constructor(private orderService: OrderService, private router: Router) {}
 
