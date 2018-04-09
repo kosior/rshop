@@ -1,0 +1,14 @@
+http://rshop.ksrk.tech {
+    redir / https://rshop.ksrk.tech{uri}
+}
+
+https://rshop.ksrk.tech {
+    root /srv/rshop/
+    proxy /api/ django:8000 {
+        without /api
+        transparent
+        except /static /media
+    }
+    log
+}
+

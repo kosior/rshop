@@ -1,0 +1,58 @@
+version: "3"
+
+volumes:
+  postgres_data:
+  caddy:
+  static:
+  media:
+  ng:
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file: 
+      - ./BE/.env
+  redis:
+    image: redis
+    ports:
+      - "6379"
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/production/django/Dockerfile
+    volumes:
+      - ./BE/:/app
+      - static:/app/static
+      - media:/app/media
+    env_file:
+      - ./BE/.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    command: /start.sh
+  angular:
+    build:
+      context: .
+      dockerfile: ./compose/production/angular/Dockerfile
+    volumes:
+      - ./FE/:/app
+      - ng:/app/dist
+  caddy:
+    build:
+      context: .
+      dockerfile: ./compose/production/caddy/Dockerfile
+    depends_on:
+      - django
+      - angular
+    volumes:
+      - caddy:/root/.caddy
+      - static:/srv/rshop/api/static
+      - media:/srv/rshop/api/media
+      - ng:/srv/rshop
+    ports:
+      - "0.0.0.0:80:80"
+      - "0.0.0.0:443:443"
