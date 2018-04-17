@@ -15,3 +15,9 @@ class ProductViewSet(ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(image=self.request.data.get('image'))
+
+    def perform_update(self, serializer):
+        image = self.request.data.get('image')
+        image_kw = {'image': image} if image else {}
+        serializer.save(**image_kw)
+
